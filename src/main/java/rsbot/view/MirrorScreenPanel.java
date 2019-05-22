@@ -2,6 +2,7 @@ package rsbot.view;
 
 import rsbot.MyMouseController;
 import rsbot.observer.Observable;
+import rsbot.observer.Observer;
 import rsbot.view.drawable.Drawable;
 import rsbot.view.drawable.Draws;
 import rsbot.view.drawable.SquareFrame;
@@ -9,12 +10,16 @@ import rsbot.view.drawable.SquareFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MirrorScreenPanel extends JPanel implements Observable, Draws {
 
     private BufferedImage gameMirror;
     private final Rectangle CAPTURE_RECT;
     private Robot robot;
+
+    private List<Observer> _observers = new LinkedList<>();
 
     public MirrorScreenPanel(Rectangle capture_rect) {
         this.CAPTURE_RECT = capture_rect;
@@ -41,8 +46,16 @@ public class MirrorScreenPanel extends JPanel implements Observable, Draws {
     }
 
     // region Observer
+    public void addObserver(Observer o) {
+        _observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        _observers.remove(o);
+    }
+
     public void notifyObservers() {
-        observers.forEach(o -> o.update(gameMirror));
+        _observers.forEach(o -> o.update(gameMirror));
     }
     // endregion Observer
 }

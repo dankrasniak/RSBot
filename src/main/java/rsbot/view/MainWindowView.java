@@ -1,11 +1,16 @@
 package rsbot.view;
 
 import rsbot.MyKeyboardController;
+import rsbot.observer.Observable;
+import rsbot.observer.Observer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.List;
 
-public class MainWindowView extends JFrame implements Runnable {
+public class MainWindowView extends JFrame implements Runnable, Observer, Observable {
 
     private final int GAME_WIDTH = 740;
     private final int GAME_HEIGHT = 500;
@@ -16,8 +21,16 @@ public class MainWindowView extends JFrame implements Runnable {
     private final int LOOP_DELAY = 25;
     private boolean RUNNING = true;
 
+    private BufferedImage _gameMirror;
+    private List<Observer> _observers = new LinkedList<>();
+
     public void initialize() {
-        this.add(new MirrorScreenPanel(CAPTURE_RECT));
+        MirrorScreenPanel mirrorScreen = new MirrorScreenPanel(CAPTURE_RECT);
+        mirrorScreen.addObserver(this);
+        this.add(mirrorScreen);
+
+        // Add Logic Controller
+//        this.addObserver(LogicController);
 
         this.addKeyListener(new MyKeyboardController(this));
 
@@ -34,6 +47,25 @@ public class MainWindowView extends JFrame implements Runnable {
         try { Thread.sleep(LOOP_DELAY); } catch (InterruptedException e) { e.printStackTrace(); }
         repaint();
     }
+
+    // region Observer
+    public void addObserver(Observer o) {
+        _observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        _observers.remove(o);
+    }
+
+    public void update(Object arg) {
+        _gameMirror = (BufferedImage) arg;
+        notifyObservers();
+    }
+
+    public void notifyObservers() {
+        _observers.forEach(o -> o.update(_gameMirror));
+    }
+    // endregion Observer
 
     //region Runnable implementations - run, close
     public void run() {
