@@ -18,7 +18,6 @@ public class MainWindowView extends JFrame implements Runnable {
 
     public void initialize() {
         this.add(new MirrorScreenPanel(CAPTURE_RECT));
-        this.add(new DetailsScreenPanel());
 
         this.addKeyListener(new MyKeyboardController(this));
 

@@ -1,5 +1,7 @@
 package rsbot.view;
 
+import rsbot.MyMouseController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,6 +16,7 @@ public class MirrorScreenPanel extends JPanel {
     public MirrorScreenPanel(Rectangle capture_rect) {
         this.CAPTURE_RECT = capture_rect;
 
+        this.addMouseListener(new MyMouseController());
         try { this.robot = new Robot(); } catch (AWTException e) {e.printStackTrace();}
     }
 
