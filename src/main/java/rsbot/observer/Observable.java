@@ -1,9 +1,20 @@
 package rsbot.observer;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public interface Observable {
-    void addObserver(Observer o);
+    List<Observer> observers = new LinkedList<Observer>();
 
-    void removeObserver(Observer o);
+    default void addObserver(Observer o) {
+        observers.add(o);
+    }
 
-    void notifyObservers();
+    default void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    default void notifyObservers() {
+        observers.forEach(o -> o.update(null));
+    }
 }

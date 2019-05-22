@@ -9,7 +9,7 @@ public class MainWindowView extends JFrame implements Runnable {
 
     private final int GAME_WIDTH = 740;
     private final int GAME_HEIGHT = 500;
-    private final int OFFSET_TO_BE_SPECIFIED = -8;
+    private final int OFFSET_TO_BE_SPECIFIED = -8; // TODO
     private final Rectangle CAPTURE_RECT = new Rectangle(OFFSET_TO_BE_SPECIFIED, 0, GAME_WIDTH, GAME_HEIGHT);
     private final Point WINDOW_POSITION = new Point(CAPTURE_RECT.x + CAPTURE_RECT.width + 40, CAPTURE_RECT.y);
 

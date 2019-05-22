@@ -1,17 +1,22 @@
 package rsbot;
 
-import rsbot.view.MainWindowView;
+import rsbot.observer.Observer;
+import rsbot.view.drawable.Drawable;
+import rsbot.view.drawable.Draws;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class MyMouseController implements MouseListener, MouseMotionListener {
+public class MyMouseController implements MouseListener, MouseMotionListener, Observer {
 
-    private MainWindowView _view;
+    private Draws _view;
+    private Drawable _defaultCursor;
 
-    private int mouseX;
-    private int mouseY;
+    public MyMouseController(Draws view, Drawable defaultCursor) {
+        this._view = view;
+        this._defaultCursor = defaultCursor;
+    }
 
     public void mouseClicked(MouseEvent e) {
 
@@ -38,7 +43,11 @@ public class MyMouseController implements MouseListener, MouseMotionListener {
     }
 
     public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
+        _defaultCursor.posX = e.getX();
+        _defaultCursor.posY = e.getY();
+    }
+
+    public void update(Object arg) {
+        _view.draw(_defaultCursor);
     }
 }
