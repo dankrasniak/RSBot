@@ -1,4 +1,4 @@
-package rsbot;
+package rsbot.controllers;
 
 import rsbot.observer.Observer;
 import rsbot.view.drawable.Drawable;

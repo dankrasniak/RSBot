@@ -1,4 +1,4 @@
-package rsbot;
+package rsbot.controllers;
 
 import rsbot.view.MainWindowView;
 

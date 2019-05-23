@@ -1,6 +1,6 @@
 package rsbot.view;
 
-import rsbot.MyMouseController;
+import rsbot.controllers.MyMouseController;
 import rsbot.observer.Observable;
 import rsbot.observer.Observer;
 import rsbot.view.drawable.Drawable;

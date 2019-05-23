@@ -1,6 +1,7 @@
 package rsbot.view;
 
-import rsbot.MyKeyboardController;
+import rsbot.controllers.MyKeyboardController;
+import rsbot.controllers.MyLogicController;
 import rsbot.observer.Observable;
 import rsbot.observer.Observer;
 
@@ -28,8 +29,7 @@ public class MainWindowView extends JFrame implements Runnable, Observer, Observ
         mirrorScreen.addObserver(this);
         this.add(mirrorScreen);
 
-        // Add Logic Controller
-//        this.addObserver(LogicController);
+        this.addObserver(new MyLogicController());
 
         this.addKeyListener(new MyKeyboardController(this));
 
