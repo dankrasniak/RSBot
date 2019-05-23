@@ -19,8 +19,6 @@ public class MirrorScreenPanel extends JPanel implements Observable, Draws {
     private final Rectangle CAPTURE_RECT;
     private Robot robot;
 
-    private List<Observer> _observers = new LinkedList<>();
-
     public MirrorScreenPanel(Rectangle capture_rect) {
         this.CAPTURE_RECT = capture_rect;
 
@@ -46,6 +44,9 @@ public class MirrorScreenPanel extends JPanel implements Observable, Draws {
     }
 
     // region Observer
+
+    private List<Observer> _observers = new LinkedList<>();
+
     public void addObserver(Observer o) {
         _observers.add(o);
     }
