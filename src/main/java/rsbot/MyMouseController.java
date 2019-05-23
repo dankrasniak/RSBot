@@ -43,8 +43,7 @@ public class MyMouseController implements MouseListener, MouseMotionListener, Ob
     }
 
     public void mouseMoved(MouseEvent e) {
-        _defaultCursor.posX = e.getX();
-        _defaultCursor.posY = e.getY();
+        _defaultCursor.setPosition(e.getLocationOnScreen());
     }
 
     public void update(Object arg) {

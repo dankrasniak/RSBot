@@ -4,8 +4,13 @@ import java.awt.*;
 
 public abstract class Drawable {
     Color color;
-    public int posX;
-    public int posY;
+    protected int posX;
+    protected int posY;
 
     public void draw(Graphics g) {}
+
+    public void setPosition(Point newPosition) {
+        this.posX = newPosition.x;
+        this.posY = newPosition.y;
+    }
 }

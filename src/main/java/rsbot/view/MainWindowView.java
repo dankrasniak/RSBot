@@ -22,7 +22,6 @@ public class MainWindowView extends JFrame implements Runnable, Observer, Observ
     private boolean RUNNING = true;
 
     private BufferedImage _gameMirror;
-    private List<Observer> _observers = new LinkedList<>();
 
     public void initialize() {
         MirrorScreenPanel mirrorScreen = new MirrorScreenPanel(CAPTURE_RECT);
@@ -34,10 +33,12 @@ public class MainWindowView extends JFrame implements Runnable, Observer, Observ
 
         this.addKeyListener(new MyKeyboardController(this));
 
+        // region window related
         this.setSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         this.setLocation(WINDOW_POSITION);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+        // endregion window related
 
         new Thread(this).start();
     }
@@ -49,6 +50,7 @@ public class MainWindowView extends JFrame implements Runnable, Observer, Observ
     }
 
     // region Observer
+    private List<Observer> _observers = new LinkedList<>();
     public void addObserver(Observer o) {
         _observers.add(o);
     }
