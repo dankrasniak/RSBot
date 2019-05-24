@@ -1,5 +1,6 @@
 package rsbot.controllers;
 
+import rsbot.MyFile;
 import rsbot.observer.Observer;
 import rsbot.view.drawable.Drawable;
 import rsbot.view.drawable.Draws;
@@ -27,7 +28,10 @@ public class MyMouseController implements MouseListener, MouseMotionListener, Ob
     }
 
     public void mouseReleased(MouseEvent e) {
-
+        if (e.getButton() == MouseEvent.BUTTON1)
+            MyFile.save(_view.getSubImage(e.getX(), e.getY()), true);
+        else if  (e.getButton() == MouseEvent.BUTTON2)
+            MyFile.save(_view.getSubImage(e.getX(), e.getY()), false);
     }
 
     public void mouseEntered(MouseEvent e) {

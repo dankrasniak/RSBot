@@ -1,5 +1,6 @@
 package rsbot.view;
 
+import rsbot.Mirror;
 import rsbot.controllers.MyMouseController;
 import rsbot.observer.Observable;
 import rsbot.observer.Observer;
@@ -18,16 +19,18 @@ public class MirrorScreenPanel extends JPanel implements Observable, Draws {
     private BufferedImage gameMirror;
     private final Rectangle CAPTURE_RECT;
     private Robot robot;
+    private final int CAPTURE_FIELD_SIZE = 32;
 
     public MirrorScreenPanel(Rectangle capture_rect) {
         this.CAPTURE_RECT = capture_rect;
 
-        Drawable defaultCursor = new SquareFrame(Color.RED, 0,0, 32);
+        Drawable defaultCursor = new SquareFrame(Color.RED, 0,0, CAPTURE_FIELD_SIZE);
 
         MyMouseController myMouseController = new MyMouseController(this, defaultCursor);
         addMouseListener(myMouseController);
         addMouseMotionListener(myMouseController);
         addObserver(myMouseController);
+        addObserver(Mirror.getInstance());
 
         try { this.robot = new Robot(); } catch (AWTException e) {e.printStackTrace();}
     }
