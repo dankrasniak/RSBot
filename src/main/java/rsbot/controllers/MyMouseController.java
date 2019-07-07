@@ -5,6 +5,7 @@ import rsbot.observer.Observer;
 import rsbot.view.drawable.Drawable;
 import rsbot.view.drawable.Draws;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -28,10 +29,19 @@ public class MyMouseController implements MouseListener, MouseMotionListener, Ob
     }
 
     public void mouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1)
-            MyFile.save(_view.getSubImage(e.getX(), e.getY()), true);
-        else if  (e.getButton() == MouseEvent.BUTTON2)
-            MyFile.save(_view.getSubImage(e.getX(), e.getY()), false);
+        Point point = new Point(e.getX(), e.getY());
+        if (isLeftClick(e))
+            MyFile.save(_view.getSubImage(point), true);
+        else if (isRightClick(e))
+            MyFile.save(_view.getSubImage(point), false);
+    }
+
+    private boolean isRightClick(MouseEvent e) {
+        return e.getButton() == MouseEvent.BUTTON2;
+    }
+
+    private boolean isLeftClick(MouseEvent e) {
+        return e.getButton() == MouseEvent.BUTTON1;
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -47,7 +57,7 @@ public class MyMouseController implements MouseListener, MouseMotionListener, Ob
     }
 
     public void mouseMoved(MouseEvent e) {
-        _defaultCursor.setPosition(e.getLocationOnScreen());
+        _defaultCursor.setPosition(e.getPoint());
     }
 
     public void update(Object arg) {

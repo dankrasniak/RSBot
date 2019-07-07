@@ -15,6 +15,7 @@ public class SquareFrame extends Drawable {
 
     public void draw(Graphics g) {
         g.setColor(color);
-        g.drawRect(posX-fieldSize/2, posY-fieldSize/2, fieldSize, fieldSize);
+        g.drawRect(posX-fieldSize/2-1, posY-fieldSize/2-1,
+                fieldSize+1, fieldSize+1);
     }
 }
