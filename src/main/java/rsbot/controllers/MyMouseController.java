@@ -31,9 +31,9 @@ public class MyMouseController implements MouseListener, MouseMotionListener, Ob
     public void mouseReleased(MouseEvent e) {
         Point point = new Point(e.getX(), e.getY());
         if (isLeftClick(e))
-            MyFile.save(_view.getSubImage(point), true);
+            MyFile.save(_view.getNewSubImage(point), true);
         else if (isRightClick(e))
-            MyFile.save(_view.getSubImage(point), false);
+            MyFile.save(_view.getNewSubImage(point), false);
     }
 
     private boolean isRightClick(MouseEvent e) {
